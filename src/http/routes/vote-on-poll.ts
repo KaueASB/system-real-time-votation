@@ -9,13 +9,14 @@ export async function voteOnPoll(app: FastifyInstance) {
   app.post('/polls/:pollId/votes', async (request, reply) => {
     const voteOnPollBody = z.object({
       pollOptionId: z.string().uuid(),
+      votersName: z.string(),
     })
 
     const voteOnPollParams = z.object({
       pollId: z.string().uuid(),
     })
 
-    const { pollOptionId } = voteOnPollBody.parse(request.body)
+    const { pollOptionId, votersName } = voteOnPollBody.parse(request.body)
     const { pollId } = voteOnPollParams.parse(request.params)
 
     let { sessionId } = request.cookies
@@ -50,6 +51,7 @@ export async function voteOnPoll(app: FastifyInstance) {
 
     if(!sessionId) {
       sessionId = randomUUID()
+      sessionId.concat(votersName)
 
       reply.setCookie("sessionId", sessionId, {
         path: '/',
