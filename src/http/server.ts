@@ -1,5 +1,6 @@
 import fastify from 'fastify'
 import cookie from '@fastify/cookie'
+import cors from '@fastify/cors'
 import websocket from '@fastify/websocket'
 
 import { createPoll } from './routes/create-poll'
@@ -10,6 +11,9 @@ import { pollResults } from './ws/poll-results'
 const port = Number(process.env.PORT) || 3333
 
 const app = fastify()
+
+app.register(cors)
+
 app.register(cookie, {
   secret: "polls-app-nlw",
   hook: "onRequest",
