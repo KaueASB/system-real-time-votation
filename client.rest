@@ -1,0 +1,33 @@
+# @name vote_on_girls
+POST  http://localhost:3333/polls/f5ed1a6c-7223-4137-a6ac-8131c71f430b/votes
+Content-Type: application/json
+
+{
+  "pollOptionId": "15195b99-d502-4340-a015-cac531067445",
+  "votersName": "Kaue"
+}
+
+###
+# @name vote_on_boys
+
+POST  http://localhost:3333/polls/31aef077-efef-4a8e-a197-30f7d7b9bbc3/votes
+Content-Type: application/json
+
+{
+  "pollOptionId": "option id",
+  "votersName": "Kaue"
+}
+
+###
+# @name create_poll
+
+POST  http://localhost:3333/polls
+Content-Type: application/json
+
+{
+  "title": "Menino",
+  "options": ["Kaue", "Gabriel", "Dudu", "Matheus", "Thalles", "Vinicius"]
+}
+
+#meninas = "f5ed1a6c-7223-4137-a6ac-8131c71f430b"
+#meninos = "5c388a21-0a16-4c4f-a158-2f63e7118cef"

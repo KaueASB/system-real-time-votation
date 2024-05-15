@@ -20,8 +20,9 @@ export async function voteOnPoll(app: FastifyInstance) {
     const { pollId } = voteOnPollParams.parse(request.params)
 
     let { sessionId } = request.cookies
-
+    
     if(sessionId) {
+      sessionId = sessionId.concat("-", votersName)
       const userPreviousVoteOnPoll = await prisma.vote.findUnique({
         where: {
           sessionId_pollId: {
@@ -51,7 +52,7 @@ export async function voteOnPoll(app: FastifyInstance) {
 
     if(!sessionId) {
       sessionId = randomUUID()
-      sessionId.concat(votersName)
+      sessionId = sessionId.concat("-", votersName)
 
       reply.setCookie("sessionId", sessionId, {
         path: '/',
